@@ -1,10 +1,15 @@
 <?php
-    function calculator(string $str) : int{
-        $numbers = explode("+",$str,);
-        $numbers2 = explode("-", $str);
-        var_dump($numbers);
-        var_dump($numbers2);
-        return 0;
+  function calculator(string $str) : string{
+    $operations = array(5);
+
+    $count = 0;
+    for($i = 0; $i < strlen($str); $i++){
+      if($str[$i] == '+' || $str[$i] == '-'){
+        $operations[$count] = $str[$i];
+        $count++;
+      }
     }
-    calculator("3+3+5-1+4");
+    return '0';
+  }
+  calculator("3+3+5-1+4");
 ?>
