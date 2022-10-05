@@ -1,16 +1,11 @@
 <?php
 //Работу выполнил студент группы П-31
 //Белоусов Михаил
-function isValidInput(string $time): bool
-{
-    return ($time[0] >= 24 || $time[0] < 0 || $time[1] > 59 || $time[1] < 0 || $time[2] > 59 || $time[2] < 0) ? false : true;
-}
-
 function sumTime(string $first, string $second): string
 {
     $firstTime = explode(':', $first);
     $secondTime = explode(':', $second);
-    $sumTime = array();
+    $sumTime = [];
 
     if (!isValidInput($first) || !isValidInput($second) || count($firstTime) !== 3 || count($secondTime) !== 3) {
         return 'Ошибка ввода!';
@@ -58,6 +53,12 @@ function sumTime(string $first, string $second): string
 
     return $sumTime[0] . ':' . $sumTime[1] . ':' . $sumTime[2];
 }
+
+function isValidInput(string $time): bool
+{
+    return ($time[0] >= 24 || $time[0] < 0 || $time[1] > 59 || $time[1] < 0 || $time[2] > 59 || $time[2] < 0) ? false : true;
+}
+
 if ($argv[1] !== null && $argv[2] !== null) {
     echo sumTime($argv[1], $argv[2]);
 }
