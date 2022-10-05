@@ -50,4 +50,3 @@
     return $sum;
   }
   echo calculator('5+5+4+5+233');
-?>
