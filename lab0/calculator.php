@@ -48,4 +48,7 @@ function calculator(string $str): string
     }
     return $sum;
 }
-echo calculator('5+5+4+5+233');
+
+if ($argv[1] !== null) {
+    calculator($argv[1]);
+}
