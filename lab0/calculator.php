@@ -3,34 +3,40 @@
     $operations = array(10);
     $numbers = array(10);
     $operationsCount = 0;
-    $numbersCount = 0;
-    $firstin = null;
-    $lastin = null;
+
     for($i = 0; $i < strlen($str); $i++){
       if($str[$i] == '+' || $str[$i] == '-'){
         $operations[$operationsCount] = $str[$i];
         $operationsCount++;
       }
     }
-    preg_match_all('!\d+!', $str, $numbers);
-    var_dump($numbers);
-    $result = 0;
-    $i = $j = 0;
-    while($i < count($numbers)){
-        $number = $numbers[$i];
-        $operator = $operations[$j];
-        if($operator == '+'){
-          $result += (int) $number;
+
+    $numbers = explode('+', $str);
+    $numberOfOperations = 0;
+    $temp = '';
+    $sum = 0;
+    foreach($numbers as $num){
+      $minusPos = strpos($num, '-');
+      if($minusPos){
+        $numbersWithMinus = explode('-', $num);
+        foreach($numbersWithMinus as $keyMinus => $numMinus){
+          if($keyMinus === 0){
+            $temp = $numMinus;
+            $numberOfOperations++;
+          }
+          else{
+            $temp = $temp - (int)$numMinus;
+            $numberOfOperations++;
+          }
         }
-        elseif($operator = '-'){
-          $result -= (int) $number;
-        }
-        $i++;
-        $j++;
-        echo $result;
-        echo "\n", $i, $j , "\n";
+        $sum += $temp;
       }
-    return (int)$result;
+      else{
+        $sum += $num;
+        $numberOfOperations++;
+      }
+    }
+    return $sum;
   }
-  echo calculator("1+2321+2+4+2-12");
+  echo calculator('55+23');
 ?>
