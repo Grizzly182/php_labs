@@ -1,4 +1,6 @@
 <?php
+///Работу выполнил студент группы П-31
+/// Белоусов Михаил
   function calculator(string $str) : string{
     $operations = array(10);
     $numbers = array(10);
@@ -8,6 +10,15 @@
       if($str[$i] == '+' || $str[$i] == '-'){
         $operations[$operationsCount] = $str[$i];
         $operationsCount++;
+      }
+    }
+    if(count($operations) > 4 ){
+      return 'Ошибка ввода';
+    }
+    $correctInput = '0123456789+-';
+    for($i = 0; $i < strlen($str); $i++){
+      if(!strpos($correctInput, $str[$i])){
+        return 'Ошибка ввода';
       }
     }
 
@@ -38,5 +49,5 @@
     }
     return $sum;
   }
-  echo calculator('55+23');
+  echo calculator('5+5+4+5+233');
 ?>
