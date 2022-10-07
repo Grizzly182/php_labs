@@ -1,4 +1,6 @@
 <?php
+// Работу выполнил студент группы П-31
+// Белоусов Михаил
 require('Calculator.php');
 $calculator = new Calculator();
 echo $calculator->sum(4)->minus(1)->product(42)->division(0.3)->getResult() . PHP_EOL; // 420

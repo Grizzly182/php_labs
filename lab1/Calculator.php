@@ -1,4 +1,6 @@
 <?php
+// Работу выполнил студент группы П-31
+// Белоусов Михаил
 class Calculator
 {
     private float $result;
