@@ -1,0 +1,2 @@
+<?php
+$calculator = new Calculator();
