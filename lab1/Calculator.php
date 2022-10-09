@@ -5,6 +5,11 @@ class Calculator
 {
     private float $result;
 
+    public function __construct()
+    {
+        $this->result = 0;
+    }
+
     public function sum(float $number) : self
     {
         $this->result += $number;
@@ -32,7 +37,6 @@ class Calculator
     public function getResult() : float
     {
         $tempResult = $this->result;
-        $this->result = 0;
         return $tempResult;
     }
 }
