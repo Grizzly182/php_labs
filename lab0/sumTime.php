@@ -3,14 +3,21 @@
 //Белоусов Михаил
 function sumTime(string $first, string $second): string
 {
-    $firstTime = explode(':', $first);
-    $secondTime = explode(':', $second);
+    (int)$firstTime = explode(':', $first);
+    (int)$secondTime = explode(':', $second);
     $sumTime = [];
 
-    if (!isValidInput($first) || !isValidInput($second) || count($firstTime) !== 3 || count($secondTime) !== 3) {
+    for($i = 0; $i < count($firstTime); $i++){
+        $firstTime[$i] = (int)$firstTime[$i];
+    }
+    for($i = 0; $i < count($secondTime); $i++){
+        $secondTime[$i] = (int)$secondTime[$i];
+    }
+    if (isInvalidInput($firstTime) || isInvalidInput($secondTime) || count($firstTime) !== 3 || count($secondTime) !== 3) {
         return 'Ошибка ввода!';
     }
 
+    var_dump($firstTime);
     $validChars = ' 0123456789:';
     for ($i = 0; $i < strlen($first); $i++) {
         if (!strpos($validChars, $first[$i])) {
@@ -22,9 +29,9 @@ function sumTime(string $first, string $second): string
             return 'Ошибка ввода';
         }
     }
-
+    var_dump($secondTime);
     $sumTime = $firstTime;
-
+    var_dump($sumTime);
     //Секудны
     if ($sumTime[2] + $secondTime[2] >= 60) {
         $temp = 60 - $sumTime[2];
@@ -54,11 +61,17 @@ function sumTime(string $first, string $second): string
     return $sumTime[0] . ':' . $sumTime[1] . ':' . $sumTime[2];
 }
 
-function isValidInput(string $time): bool
+function isInvalidInput($time): bool
 {
-    return ($time[0] >= 24 || $time[0] < 0 || $time[1] > 59 || $time[1] < 0 || $time[2] > 59 || $time[2] < 0) ? false : true;
+    if(((int)$time[0] >= 24 || (int)$time[0] < 0) || ((int)$time[1] >= 60 || (int)$time[1] < 0) || ((int)$time[2] >= 60 || (int)$time[2] < 0)){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
+echo sumTime('23:59:50', '10:20:30');
 if ($argv[1] !== null && $argv[2] !== null) {
     echo sumTime($argv[1], $argv[2]);
 }
