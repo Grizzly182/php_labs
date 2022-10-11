@@ -7,12 +7,6 @@ function sumTime(string $first, string $second): string
     (int)$secondTime = explode(':', $second);
     $sumTime = [];
 
-    for($i = 0; $i < count($firstTime); $i++){
-        $firstTime[$i] = (int)$firstTime[$i];
-    }
-    for($i = 0; $i < count($secondTime); $i++){
-        $secondTime[$i] = (int)$secondTime[$i];
-    }
     if (isInvalidInput($firstTime) || isInvalidInput($secondTime) || count($firstTime) !== 3 || count($secondTime) !== 3) {
         return 'Ошибка ввода!';
     }
@@ -63,15 +57,10 @@ function sumTime(string $first, string $second): string
 
 function isInvalidInput($time): bool
 {
-    if(((int)$time[0] >= 24 || (int)$time[0] < 0) || ((int)$time[1] >= 60 || (int)$time[1] < 0) || ((int)$time[2] >= 60 || (int)$time[2] < 0)){
-        return true;
-    }
-    else{
-        return false;
-    }
+    return ((int)$time[0] >= 24 || (int)$time[0] < 0) || ((int)$time[1] >= 60 || (int)$time[1] < 0) || ((int)$time[2] >= 60 || (int)$time[2] < 0) ? true : false;
 }
 
-echo sumTime('23:59:50', '10:20:30');
+echo sumTime('24:59:50', '10:20:30');
 if ($argv[1] !== null && $argv[2] !== null) {
     echo sumTime($argv[1], $argv[2]);
 }
