@@ -1,8 +1,8 @@
 <?php
-  class Monkey extends Animal{
+class Monkey extends Animal
+{
     public function getHowEat(): int
     {
-      return 2;
+        return 2;
     }
-  }
-?>
+}

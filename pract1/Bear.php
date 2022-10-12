@@ -1,8 +1,9 @@
 <?php
-  class Bear extends Animal{
+require_once('Animal.php');
+class Bear extends Animal
+{
     public function getHowEat(): int
     {
-      return 4;
+        return 4;
     }
-  }
-?>
+}
