@@ -1,12 +1,13 @@
 <?php
 require('Animal.php');
+require('Stock.php');
 include_once('C:\\Users\\tiger\\Desktop\\php\\pract1\\Bear.php');
 include_once('C:\\Users\\tiger\\Desktop\\php\\pract1\\Tiger.php');
 include_once('C:\\Users\\tiger\\Desktop\\php\\pract1\\Monkey.php');
 class Zoo
 {
-    private $animals;
-    private $stock;
+    public $animals;
+    public $stock;
 
     public function __construct()
     {
@@ -14,7 +15,36 @@ class Zoo
             new Bear('Billy'), new Bear('Van'), new Monkey('Wee-Wee'), new Tiger('Alexandr'),
             new Monkey('Porkchop'), new Monkey('Ronaldo'), new Tiger('Full Master')
         ];
+        $this->stock = new Stock();
     }
+    
+    public static function welcome(): string
+    {
+        return 'Добро пожаловать в зоопарк!' . PHP_EOL . PHP_EOL;
+    }
+
+    public function feedAnimals(): void
+    {
+        $needToFeed = $this->getCountFood();
+        if ($needToFeed <= $this->stock->getCountFood()) {
+            foreach ($this->animals as $animal) {
+                $food = $animal->getHowEat();
+                $animal->eat($food);
+                $this->stock->removeFood($food);
+            }
+            echo 'Все животные сыты.' . PHP_EOL . 'Еды осталось на складе: ' . $this->stock->getCountFood() . PHP_EOL;
+        } else {
+            echo 'Еды на складе не хватит, нужен привоз' . PHP_EOL;
+        }
+    }
+
+    public function showAnimals(): void
+    {
+        foreach ($this->animals as $animal) {
+            echo $animal->getName() . ' - ' . $this->getType($animal) . PHP_EOL;
+        }
+    }
+    
     public function getCountAngry(): int
     {
         $count = 0;
@@ -72,20 +102,18 @@ class Zoo
         return $count;
     }
 
-    public function getCountHungryAnimals() : int{
+    public function getCountHungryAnimals(): int
+    {
         $hungryAnimals = $this->getHungryAnimals();
         $count = 0;
-        foreach($hungryAnimals as $animal){
+        foreach ($hungryAnimals as $animal) {
             $count += $animal->getHowEat();
         }
         return $count;
     }
 
-    public function getType(Animal $animal) : string{
+    private function getType(Animal $animal): string
+    {
         return get_class($animal);
     }
 }
-
-$zoo = new Zoo();
-$bear = new Bear('michael');
-echo $zoo->getType($bear);
