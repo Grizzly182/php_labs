@@ -36,7 +36,6 @@ class Calculator
 
     public function getResult() : float
     {
-        $tempResult = $this->result;
-        return $tempResult;
+        return $this->result;
     }
 }
