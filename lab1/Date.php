@@ -12,7 +12,7 @@ class Date
         $this->day = $day;
         $this->month = $month;
         $this->year = $year;
-        if (!$this->isValidDateInput($this)) {
+        if (!self::isValidDateInput($this)) {
             throw new Exception('Неверный ввод');
         }
     }
