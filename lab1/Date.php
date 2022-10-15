@@ -21,10 +21,10 @@ class Date
     {
         switch ($format) {
             case 'ru':
-                echo $this->day . '.' . $this->month . '.' . $this->year . PHP_EOL;
+                echo "{$this->day}.{$this->month}.{$this->year}" . PHP_EOL;
                 break;
             case 'en':
-                echo $this->year . '-' . $this->month . '-' . $this->day . PHP_EOL;
+                echo "{$this->year}-{$this->month}-{$this->day}" . PHP_EOL;
                 break;
             default:
                 throw new Exception('Неверный формат.');
