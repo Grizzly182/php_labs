@@ -1,9 +1,9 @@
 <?php
-require('Animal.php');
-require('Stock.php');
-include_once('C:\\Users\\tiger\\Desktop\\php\\pract1\\Bear.php');
-include_once('C:\\Users\\tiger\\Desktop\\php\\pract1\\Tiger.php');
-include_once('C:\\Users\\tiger\\Desktop\\php\\pract1\\Monkey.php');
+require_once('Animal.php');
+require_once('Stock.php');
+require_once('Bear.php');
+require_once('Tiger.php');
+require_once('Monkey.php');
 class Zoo
 {
     public $animals;
@@ -58,12 +58,10 @@ class Zoo
 
     public function getAngryAnimals(): array
     {
-        $arrayCount = 0;
         $angryAnimals = [];
         foreach ($this->animals as $animal) {
             if ($animal->isAngry()) {
-                $angryAnimals[$arrayCount] = $animal;
-                $arrayCount++;
+                $angryAnimals[] = $animal;
             }
         }
         return $angryAnimals;
@@ -82,12 +80,10 @@ class Zoo
 
     public function getHungryAnimals(): array
     {
-        $arrayCount = 0;
         $hungryAnimals = [];
         foreach ($this->animals as $animal) {
             if ($animal->isHungry()) {
-                $hungryAnimals[$arrayCount] = $animal;
-                $arrayCount++;
+                $hungryAnimals[] = $animal;
             }
         }
         return $hungryAnimals;
