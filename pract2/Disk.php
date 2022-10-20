@@ -10,10 +10,17 @@ class Disk implements Renderable
     {
         $this->name = $diskName;
         $this->directories = $directories;
+        foreach($directories as $directory){
+            $this->files += $directory->getFiles();
+        }
     }
 
     public function render(): string
     {
-        return $this->name . PHP_EOL . var_dump($this->directories) . PHP_EOL . var_dump($this->files) . PHP_EOL;
+        $outString = '';
+        foreach($this->directories as $directory){
+            $outString += $directory->render();
+        }
+        return $this->name . PHP_EOL . $outString . PHP_EOL;
     }
 }

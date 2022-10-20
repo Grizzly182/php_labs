@@ -4,7 +4,7 @@ class Directory implements Renderable
 {
 
     private string $name;
-    private $files = [];
+    private array $files = [];
 
     public function __construct(string $name, File $files)
     {
@@ -14,6 +14,10 @@ class Directory implements Renderable
 
     public function render(): string
     {
-        return $this->name . PHP_EOL . var_dump($this->files);
+        return $this->name . PHP_EOL . var_dump($this->files) . PHP_EOL;
+    }
+
+    public function getFiles() : array{
+        return $this->files;
     }
 }
