@@ -10,7 +10,7 @@ class Address
         if ($house <= 0) {
             throw new Exception('Неверный адрес!');
         }
-        $this->$city = $city;
+        $this->city = $city;
         $this->street = $street;
         $this->house = $house;
     }
