@@ -8,10 +8,8 @@ try {
         echo 'false';
     } else
         echo 'true';
-}
-catch(WrongLoginException $e){
+} catch (WrongLoginException $e) {
     echo $e->getMessage();
-}
-catch(WrongPasswordException $e){
+} catch (WrongPasswordException $e) {
     echo $e->getMessage();
 }

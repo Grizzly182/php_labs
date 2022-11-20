@@ -6,13 +6,13 @@ class Account
 {
     public static function checkLogin(string $login, string $password, string $confirmPassword): bool
     {
-        if(!self::isValidLogin($login)){
+        if (!self::isValidLogin($login)) {
             return false;
         }
-        if(!self::isValidPassword($password)){
+        if (!self::isValidPassword($password)) {
             return false;
         }
-        if(!self::isValidPassword($confirmPassword) || $confirmPassword !== $password){
+        if (!self::isValidPassword($confirmPassword) || $confirmPassword !== $password) {
             return false;
         }
         return true;
@@ -24,10 +24,10 @@ class Account
         if ($loginLength >= 20) {
             throw new WrongLoginException('Слишком длинный логин.');
         }
-        if($loginLength === 0){
+        if ($loginLength === 0) {
             throw new WrongLoginException('Логин пустой.');
         }
-        if(!self::isEnglish($login)){
+        if (!self::isEnglish($login)) {
             throw new WrongLoginException('В логине используются неразрешенные символы.');
         }
         return true;
@@ -39,16 +39,17 @@ class Account
         if ($passwordLength >= 20) {
             throw new WrongPasswordException('Слишком длинный пароль.');
         }
-        if($passwordLength === 0){
+        if ($passwordLength === 0) {
             throw new WrongPasswordException('Пароль пустой.');
         }
-        if(!self::isEnglish($password)){
+        if (!self::isEnglish($password)) {
             throw new WrongPasswordException('В пароле используются неразрешенные символы.');
         }
         return true;
     }
 
-    private static function isEnglish(string $str) : bool{
-        return !preg_match('/[^A-Za-z0-9_]/',$str);
+    private static function isEnglish(string $str): bool
+    {
+        return !preg_match('/[^A-Za-z0-9_]/', $str);
     }
 }
