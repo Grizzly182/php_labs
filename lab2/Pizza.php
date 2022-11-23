@@ -1,7 +1,8 @@
 <?php
 namespace Mikhail\Repo;
 
-abstract class Pizza{
+abstract class Pizza
+{
     private string $name;
     private string $sauce;
 
@@ -10,7 +11,7 @@ abstract class Pizza{
      */
     private array $toppings = [];
 
-    
+
     public function __construct(string $name, string $sauce, string $toppings)
     {
         $this->name = $name;
@@ -18,13 +19,19 @@ abstract class Pizza{
         $this->toppings = $toppings;
     }
 
-    public function prepare() : void{
+    public function prepare(): void
+    {
         $toppingsString = '';
-        foreach($this->toppings as $topping){
+        foreach ($this->toppings as $topping) {
             $toppingsString += "$topping\n";
         }
         print("Началась готовка пиццы {$this->name}");
         print("Добавлен соус {$this->sauce}");
         print("Добавлены топики:\n {$toppingsString}");
+    }
+
+    public function cut(): void
+    {
+        print('Данную пиццу нарезают по диагонали.');
     }
 }
