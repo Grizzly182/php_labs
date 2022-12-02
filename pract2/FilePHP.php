@@ -1,6 +1,6 @@
 <?php
 require_once('Renderable.php');
-class File implements Renderable
+class FilePHP implements Renderable
 {
     private string $name;
 
@@ -9,8 +9,8 @@ class File implements Renderable
         $this->name = $fileName;
     }
 
-    public function render(): string
+    public function render(): void
     {
-        return $this->name;
+        echo $this->name . PHP_EOL;
     }
 }

@@ -1,23 +1,26 @@
 <?php
-require_once('Renderable.php');
+require_once 'Renderable.php';
+require_once 'FilePHP.php';
 class Directory implements Renderable
 {
 
     private string $name;
-    private array $files = [];
+    /**
+     * @var array<Renderable> $components
+     */
+    private array $components = [];
 
-    public function __construct(string $name, File $files)
+    public function __construct(string $name, array $files)
     {
         $this->name = $name;
-        $this->files = $files;
+        $this->components = $files;
     }
 
-    public function render(): string
+    public function render(): void
     {
-        return $this->name . PHP_EOL . var_dump($this->files) . PHP_EOL;
-    }
-
-    public function getFiles() : array{
-        return $this->files;
+        echo "Название директории: {$this->name}" . PHP_EOL;
+        foreach ($this->components as $component) {
+            $component->render();
+        }
     }
 }

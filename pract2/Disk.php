@@ -3,24 +3,22 @@ require_once('Renderable.php');
 class Disk implements Renderable
 {
     private string $name;
-    private $directories = [];
-    private $files = [];
+    /**
+     * @var array<Renderable> $components
+     */
+    private array $components = [];
 
     public function __construct(string $diskName, array $directories)
     {
         $this->name = $diskName;
-        $this->directories = $directories;
-        foreach($directories as $directory){
-            $this->files += $directory->getFiles();
-        }
+        $this->components = $directories;
     }
 
-    public function render(): string
+    public function render(): void
     {
-        $outString = '';
-        foreach($this->directories as $directory){
-            $outString += $directory->render();
+        echo "Название диска: {$this->name}" . PHP_EOL;
+        foreach ($this->components as $component) {
+            echo $component->render();
         }
-        return $this->name . PHP_EOL . $outString . PHP_EOL;
     }
 }

@@ -1,5 +1,5 @@
 <?php
 interface Renderable
 {
-    public function Render();
+    public function Render(): void;
 }
