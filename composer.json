@@ -1,18 +1,19 @@
 {
-    "name": "miha/php",
+    "name": "mikhail/php_labs",
+    "description": "php labs for mrmt",
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Miha\\Php\\": "src/"
+            "Mikhail\\PhpLabs\\": "src/"
         }
     },
     "authors": [
         {
-            "name": "Mikhail Belousov",
-            "email": "tiger.mananticot@yandex.ru"
+            "name": "Mikhail",
+            "email": "belousovmihailres@gmail.com"
         }
     ],
     "require-dev": {
-        "phpstan/phpstan": "^1.8"
+        "phpstan/phpstan": "^1.9"
     }
 }
