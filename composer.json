@@ -1,11 +1,12 @@
 {
+    
     "name": "mikhail/php_labs",
     "description": "php labs for mrmt",
     "type": "project",
     "autoload": {
-        "psr-4": {
-            "Mikhail\\PhpLabs\\": "src/"
-        }
+        "classmap": [
+            "src/"
+        ]
     },
     "authors": [
         {
@@ -13,7 +14,11 @@
             "email": "belousovmihailres@gmail.com"
         }
     ],
+    "require": {
+        "phpstan/phpstan": "^1.9",
+        "mikhail/pizza_store": "dev-main"
+    },
     "require-dev": {
-        "phpstan/phpstan": "^1.9"
+        "phpunit/phpunit": "^9.5"
     }
 }
