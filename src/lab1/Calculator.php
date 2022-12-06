@@ -34,6 +34,11 @@ class Calculator
         return $this;
     }
 
+    public function exp(float $exp) :self{
+        $this->result = pow($this->result, $exp);
+        return $this;
+    }
+
     public function getResult() : float
     {
         return $this->result;

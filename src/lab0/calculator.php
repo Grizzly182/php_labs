@@ -1,8 +1,12 @@
 <?php
 ///Работу выполнил студент группы П-31
 /// Белоусов Михаил
+require 'C:/php_labs/vendor/autoload.php';
+use Mikhail\Repo\Pizza;
 function calculator(string $str): string
 {
+    $pizza = new Pizza('', '', []);
+    $pizza->prepare()->cut();
     $operations = [10];
     $numbers = [10];
 
@@ -42,7 +46,4 @@ function calculator(string $str): string
     }
     return $sum;
 }
-
-if ($argv[1] !== null) {
-    calculator($argv[1]);
-}
+calculator('3+2');
