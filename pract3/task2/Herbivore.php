@@ -2,9 +2,9 @@
 require_once('Animal.php');
 class Herbivore extends Animal
 {
-    private const FOOD_AMOUNT = 2;
+    protected $foodAmount = 1;
     public function getFoodAmountAndType() : string
     {
-        return "Животное травоядное." . PHP_EOL . "Для пропитания необходимо " . self::FOOD_AMOUNT . " растительной пищи." . PHP_EOL;
+        return "Животное травоядное." . PHP_EOL . "Для пропитания необходимо " . $this->foodAmount . " растительной пищи." . PHP_EOL;
     }
 }
