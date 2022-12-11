@@ -1,12 +1,8 @@
 <?php
 ///Работу выполнил студент группы П-31
 /// Белоусов Михаил
-require 'C:/php_labs/vendor/autoload.php';
-use Mikhail\Repo\Pizza;
 function calculator(string $str): string
 {
-    $pizza = new Pizza('', '', []);
-    $pizza->prepare()->cut();
     $operations = [10];
     $numbers = [10];
 
