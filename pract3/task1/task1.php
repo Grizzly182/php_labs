@@ -66,7 +66,29 @@ function sortCustomersByAlphabet(array $customers): array
     return $sortedArray;
 }
 
+function getCustomersByCreditCardNumber(array $customers, string $number) : array
+{
+    $sortedArray = [];
+    if(preg_match('/[A-Za-zА-Яа-я]/', $number)){
+        throw new InvalidArgumentException();
+    }
+
+    foreach($customers as $customer){
+        if(preg_match("/({$number})/", $customer->getCreditCardNumber())){
+            $sortedArray[] = $customer;
+        }
+    }
+    return $sortedArray;
+}
+
+echo 'Список клиентов в алфавитном порядке:' . PHP_EOL;
 $sortedArray = sortCustomersByAlphabet($customers);
 foreach ($sortedArray as $customer) {
-    echo $customer->getSurname() . PHP_EOL;
+    echo $customer->showCustomer() . PHP_EOL;
+}
+
+echo PHP_EOL . PHP_EOL . PHP_EOL . 'Список клиентов с номером кредитки в одинаковом диапазоне' . PHP_EOL . PHP_EOL;
+$sortedArray = getCustomersByCreditCardNumber($customers, '445');
+foreach ($sortedArray as $customer) {
+    echo $customer->showCustomer() . PHP_EOL;
 }
