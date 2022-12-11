@@ -8,13 +8,13 @@ class Address
     public function __construct(string $city, string $street, int $house)
     {
         if ($house <= 0) {
-            throw new Exception('Неверный адрес!');
+            throw new InvalidArgumentException('Неверный адрес!');
         }
         $this->city = $city;
         $this->street = $street;
         $this->house = $house;
     }
     public function getAddress() : string{
-        return "{$this->city}, {$this->street} Street, {$this->house}";
+        return "{$this->city}, {$this->street} Улица, {$this->house}";
     }
 }
