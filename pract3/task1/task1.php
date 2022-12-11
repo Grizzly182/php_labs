@@ -48,23 +48,19 @@ function compareSurnames(Customer $first, Customer $second): int
 
 function sortCustomersByAlphabet(array $customers): array
 {
-    $sortOrder = "АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя";
+    $sortOrder = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
     $sortedArray = [];
-    
-    $offset = 0;
-    for ($i = 0; $i < strlen($sortOrder); $i++) {
-        for ($j = 0 + $offset; $j < count($customers); $j++) {
-            $surname = '';
-            if ($customers[$j] != null) {
-                $surname = mb_substr($customers[$j]->getSurname(), 0, 1);
-                $sortLetter = mb_substr($sortOrder, $i, 1);
-                echo $sortLetter . PHP_EOL; //Debug
-                if ($sortLetter === $surname) {
-                    echo 'Added' . 'offset =' . $offset . PHP_EOL . 'j= ' . $j . PHP_EOL; //Debug
-                    $sortedArray[] = $customers[$j];
-                    $offset++;
-                }
+    $customersAdded = 0;
+    for ($i = 0; $i < strlen($sortOrder); $i++){
+        for($j = 0; $j < count($customers); $j++){
+            $sortLetter = mb_substr($sortOrder, $i, 1);
+            if(preg_match("/^{$sortLetter}[А-ЯA-Zа-яa-z]/i", $customers[$j]->getSurname())){
+                $sortedArray[] = $customers[$j];
+                $customersAdded++;
             }
+        }
+        if($customersAdded === count($customers)){
+            break;
         }
     }
     return $sortedArray;
