@@ -9,7 +9,6 @@ class Customer
     private string $creditCardNumber;
     private string $bankAccountNumber;
 
-    //TODO: Проверки ввода
     public function __construct(
         string $surname,
         string $name,
