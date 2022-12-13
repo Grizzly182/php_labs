@@ -1,6 +1,6 @@
 <?php
 require_once('Renderable.php');
-class Disk implements Renderable
+class PHPDisk implements Renderable
 {
     private string $name;
     /**

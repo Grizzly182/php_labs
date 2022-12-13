@@ -1,7 +1,6 @@
 <?php
 require_once 'Renderable.php';
-require_once 'FilePHP.php';
-class Directory implements Renderable
+class aDirectory implements Renderable
 {
 
     private string $name;
