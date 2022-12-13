@@ -1,24 +1,23 @@
 {
-    
     "name": "mikhail/php_labs",
     "description": "php labs for mrmt",
     "type": "project",
     "autoload": {
-        "classmap": [
-            "src/"
-        ]
-    },
-    "authors": [
-        {
-            "name": "Mikhail",
-            "email": "belousovmihailres@gmail.com"
+        "psr-4": {
+            "Mikhail\\": "src/"
+        },
+        "authors": [
+            {
+                "name": "Mikhail",
+                "email": "belousovmihailres@gmail.com"
+            }
+        ],
+        "require": {
+            "phpstan/phpstan": "^1.9",
+            "mikhail/pizza_store": "dev-main"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^9.5"
         }
-    ],
-    "require": {
-        "phpstan/phpstan": "^1.9",
-        "mikhail/pizza_store": "dev-main"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^9.5"
     }
 }
