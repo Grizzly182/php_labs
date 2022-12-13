@@ -1,5 +1,4 @@
 <?php
-namespace Task3;
 
 abstract class OSComponent
 {
@@ -19,8 +18,7 @@ abstract class OSComponent
         $this->name = $newName;
     }
 
-    public abstract function Display(): void;
-    public abstract function Add(OSComponent $component): void;
-    public abstract function Delete(): void;
+    public abstract function display(): void;
+    public abstract function add(OSComponent $component): void;
     public abstract function count(): int;
 }
