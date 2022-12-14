@@ -12,7 +12,7 @@ class Disk extends OSComponent
     {
         echo $this->name . PHP_EOL;
         foreach ($this->components as $component) {
-            echo "\t" . $component->display();
+            $component->display();
         }
     }
 
@@ -26,6 +26,7 @@ class Disk extends OSComponent
             $type = $component->getType();
             if ($type === 'PHPDirectory') {
                 $directoriesAmount++;
+                /** @var PHPDirectory $component */
                 $tempDirectoryFiles += $component->getComponents();
             } else {
                 $filesAmount++;
@@ -36,6 +37,7 @@ class Disk extends OSComponent
                     if ($component->getType() === 'File') {
                         $filesAmount++;
                     } else if ($component->getType() === 'PHPDirectory') {
+                        /** @var PHPDirectory $component */
                         $finalComponents = $component->getComponentsTypes();
                     }
                 }

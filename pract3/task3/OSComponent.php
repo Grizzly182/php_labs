@@ -13,7 +13,7 @@ abstract class OSComponent
     {
         return $this->name;
     }
-    public function setName(string $newName)
+    public function setName(string $newName) : void
     {
         $this->name = $newName;
     }

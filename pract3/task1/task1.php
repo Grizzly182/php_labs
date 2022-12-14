@@ -46,6 +46,9 @@ function compareSurnames(Customer $first, Customer $second): int
     return ($firstSurname > $secondSurname) ? -1 : 1;
 }
 
+/** @param array<Customer> $customers 
+ * @return array<Customer>
+*/
 function sortCustomersByAlphabet(array $customers): array
 {
     $sortOrder = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
@@ -66,6 +69,9 @@ function sortCustomersByAlphabet(array $customers): array
     return $sortedArray;
 }
 
+/** @param array<Customer> $customers 
+ * @return array<Customer>
+*/
 function getCustomersByCreditCardNumber(array $customers, string $number) : array
 {
     $sortedArray = [];

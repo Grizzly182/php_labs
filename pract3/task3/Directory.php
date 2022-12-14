@@ -13,15 +13,16 @@ class PHPDirectory extends OSComponent
     {
         echo '' . $this->name . PHP_EOL;
         foreach ($this->components as $component) {
-            print($component->display());
+            $component->display();
         }
     }
 
+    /** @return array<OSComponent> */
     public function getComponents(): array
     {
         return $this->components;
     }
-
+    /** @return array<string> $types */
     public function getComponentsTypes(): array
     {
         $types = [];
@@ -31,6 +32,9 @@ class PHPDirectory extends OSComponent
                 $types[] = $type;
             } else {
                 $types[] = 'PHPDirectory';
+                /** @var array<string> $types 
+                 * @var PHPDirectory $component
+                */
                 $types += $component->getComponentsTypes();
             }
         }

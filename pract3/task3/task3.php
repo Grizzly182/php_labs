@@ -4,7 +4,8 @@ require_once 'Directory.php';
 require_once 'Disk.php';
 
 /**
- * @var array<Disk> $arr
+ * @param array<Disk> $arr
+ * @return array<Disk> $arr
  */
 function sortDisks(array $arr): array
 {
