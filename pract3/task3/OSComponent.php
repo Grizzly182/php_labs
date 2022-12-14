@@ -17,6 +17,10 @@ abstract class OSComponent
     {
         $this->name = $newName;
     }
+    public function getType(): string
+    {
+        return get_class($this);
+    }
 
     public abstract function display(): void;
     public abstract function add(OSComponent $component): void;
