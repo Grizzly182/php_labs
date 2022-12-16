@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class DateTests extends TestCase
 {
-    private $date;
+    private Date $date;
 
     protected function SetUp(): void
     {
