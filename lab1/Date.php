@@ -13,7 +13,7 @@ class Date
         $this->month = $month;
         $this->year = $year;
         if (!self::isValidDateInput($this)) {
-            throw new Exception('Неверный ввод');
+            throw new InvalidArgumentException('Неверный ввод');
         }
     }
 
@@ -25,7 +25,7 @@ class Date
             case 'en':
                 return "{$this->year}-{$this->month}-{$this->day}";
             default:
-                throw new Exception('Неверный формат.');
+                throw new InvalidArgumentException('Неверный формат.');
         }
     }
 
@@ -48,7 +48,7 @@ class Date
                 $formatString = 'Y-m-d';
                 break;
             default:
-                throw new Exception('Неверный формат.');
+                throw new InvalidArgumentException('Неверный формат.');
         }
         return date($formatString, strtotime("-{$daysAmount} days", strtotime($this->format('ru'))));
     }
