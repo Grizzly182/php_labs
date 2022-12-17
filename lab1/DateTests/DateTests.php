@@ -1,5 +1,5 @@
 <?php
-require_once 'C:php_labs/lab1/Date.php';
+require_once __DIR__ . '/../Date.php';
 require_once 'vendor/autoload.php';
 use PHPUnit\Framework\TestCase;
 
