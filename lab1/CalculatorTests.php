@@ -1,5 +1,5 @@
 <?php
-require_once 'C:php_labs/src/lab1/Calculator.php';
+require_once 'Calculator.php';
 require_once 'vendor/autoload.php';
 use PHPUnit\Framework\TestCase;
 
