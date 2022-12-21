@@ -13,13 +13,12 @@ class DaMichelePizzaStore extends PizzaStore
     }
     public function createPizza(string $pizzaType): Pizza
     {
-        if($pizzaType !== 'HawaiiPizza' && $pizzaType !== 'PineapplePizza'){
+        if ($pizzaType !== 'HawaiiPizza' && $pizzaType !== 'PineapplePizza') {
             throw new InvalidArgumentException('There is no such pizza in our menu');
         }
-        if($pizzaType === 'HawaiiPizza'){
+        if ($pizzaType === 'HawaiiPizza') {
             return new HawaiiPizza();
-        }
-        else{
+        } else {
             return new PineapplePizza();
         }
     }
