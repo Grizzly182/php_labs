@@ -22,8 +22,8 @@
     preg_match_all('/[0-9]+/', $equasion, $numbers);
     preg_match_all('/[-+=\/^]/', $equasion, $operations);
 
-    foreach ($numbers[0] as $number) {
-        if ((int) $number >= 10 && $isOk) {
+    for($i = 0; $i < count($numbers[0]) - 1; $i++){
+        if ((int) $numbers[0][$i] >= 10 && $isOk) {
 
             echo 'Допустимы только однозначные числа.';
             $isOk = false;
@@ -35,16 +35,16 @@
     } else if (count($numbers) >= 7 && $isOk) {
         echo 'Слишком много значений!';
         $isOk = false;
-    } else if ($operations[0][count($operations[0]) - 1] !== "=" && count($operations[0]) !== 0 && $isOk && preg_match_all('/=/',$equasion) > 1) {
+    } else if (($operations[0][count($operations[0]) - 1] !== "=" && $isOk || count($operations[0]) !== 0) || preg_match_all('/=/',$equasion) > 1) {
         echo 'Уравнение должно заканчиваться единственным знаком "="';
         $isOk = false;
     } else if($isOk){
         $sum = 0;
-        $lastNum = $numbers[0][count($operations) - 1];
+        $lastNum = (int)$numbers[0][count($operations) - 1];
         for ($i = 0; $i < count($numbers[0]) - 2; $i++) {
-            
+            $sum = 8;
         }
-        if($sum === $lastNum){
+        if($sum == $lastNum){
             echo 'Уравнение истинно.';
         }
         else{
