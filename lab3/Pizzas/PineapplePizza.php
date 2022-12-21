@@ -7,7 +7,7 @@ class PineapplePizza extends Pizza
     /**
      * @param array<string> $toppings
      */
-    public function __construct(string $sauce, array $toppings)
+    public function __construct(string $sauce = '-', array $toppings = null)
     {
         $this->name = 'Ананасовая';
         $this->sauce = $sauce;
