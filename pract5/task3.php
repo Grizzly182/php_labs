@@ -19,35 +19,92 @@
     $operations = [];
     $isOk = true;
 
+    $nums = [];
+    $ops = [];
+
     preg_match_all('/[0-9]+/', $equasion, $numbers);
     preg_match_all('/[-+=\/^]/', $equasion, $operations);
 
-    for($i = 0; $i < count($numbers[0]) - 1; $i++){
-        if ((int) $numbers[0][$i] >= 10 && $isOk) {
+    foreach ($numbers[0] as $num) {
+        $nums[] = (int) $num;
+    }
 
+    foreach ($operations[0] as $operation) {
+        $ops[] = $operation;
+    }
+
+    for ($i = 0; $i < count($nums) - 1; $i++) {
+        if ($nums[$i] >= 10 && $isOk) {
             echo 'Допустимы только однозначные числа.';
             $isOk = false;
         }
     }
 
-    if (preg_match('/[.,A-Za-zА-Яа-я!@#$%&()_|\?]/', $equasion) && $isOk) {
+    for ($i = 1; $i < strlen($equasion); $i += 2) {
+        if ($equasion[$i - 1] === '=') {
+            break;
+        }
+        if ($equasion[$i] !== ' ') {
+            echo 'Между значениями и операциями должен быть пробел.';
+            $isOk = false;
+            break;
+        }
+    }
+    $equasion = str_replace(' ', '', $equasion);
+
+    if (preg_match('/[.,A-Za-zА-Яа-я!@#$%&()_|\?]/', $equasion) && $isOk || $equasion === '') {
         echo 'Неверный ввод! Попробуйте ещё раз.';
-    } else if (count($numbers) >= 7 && $isOk) {
+        $isOk = false;
+    } else if (count($numbers[0]) > 6 && $isOk) {
         echo 'Слишком много значений!';
         $isOk = false;
-    } else if (($operations[0][count($operations[0]) - 1] !== "=" && $isOk || count($operations[0]) !== 0) || preg_match_all('/=/',$equasion) > 1) {
+    } else if (($ops[count($ops) - 1] !== '=' && $isOk) || count($ops) === 0 || preg_match_all('/=/', $equasion) > 1) {
         echo 'Уравнение должно заканчиваться единственным знаком "="';
         $isOk = false;
-    } else if($isOk){
-        $sum = 0;
-        $lastNum = (int)$numbers[0][count($operations) - 1];
-        for ($i = 0; $i < count($numbers[0]) - 2; $i++) {
-            $sum = 8;
+    } else if ($isOk) {
+        $sum = $nums[0];
+        $lastNum = $nums[count($nums) - 1];
+        $lastNumber = 0;
+        for ($i = 1; $i < strlen($equasion) - 2; $i += 2) {
+            switch ($equasion[$i]) {
+                case '/':
+                    $dividingByZero = (int) $equasion[$i + 1] === 0;
+                    if ($equasion[$i + 2] === '^' && !$dividingByZero) {
+                        $sum /= pow((int) $equasion[$i + 1], (int) $equasion[$i + 3]);
+                        $i += 2;
+                    } else if (!$dividingByZero) {
+                        $sum /= (int) $equasion[$i + 1];
+                    } else {
+                        echo 'Делить на ноль нельзя';
+                        $isOk = false;
+                    }
+                    break;
+                case '*':
+                    if ($equasion[$i + 2] === '^') {
+                        $sum *= pow((int) $equasion[$i + 1], (int) $equasion[$i + 3]);
+                        $i += 2;
+                    } else
+                        $sum *= (int) $equasion[$i + 1];
+                    break;
+                case '+':
+                    if ($equasion[$i + 2] === '^') {
+                        $sum += pow((int) $equasion[$i + 1], (int) $equasion[$i + 3]);
+                        $i += 2;
+                    } else
+                        $sum += (int) $equasion[$i + 1];
+                    break;
+                case '-':
+                    if ($equasion[$i + 2] === '^') {
+                        $sum -= pow((int) $equasion[$i + 1], (int) $equasion[$i + 3]);
+                        $i += 2;
+                    } else
+                        $sum -= (int) $equasion[$i + 1];
+                    break;
+            }
         }
-        if($sum == $lastNum){
+        if ($sum == $lastNum && $isOk) {
             echo 'Уравнение истинно.';
-        }
-        else{
+        } else if ($isOk) {
             echo 'Уравнение ложно';
         }
     }
