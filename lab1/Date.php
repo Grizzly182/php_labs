@@ -21,7 +21,7 @@ class Date
     {
         switch ($format) {
             case 'ru':
-                return "{$this->day}.{$this->month}.{$this->year}";
+                return "{$this->day}/{$this->month}/{$this->year}";
             case 'en':
                 return "{$this->year}-{$this->month}-{$this->day}";
             default:
@@ -51,6 +51,21 @@ class Date
                 throw new InvalidArgumentException('Неверный формат.');
         }
         return date($formatString, strtotime("-{$daysAmount} days", strtotime($this->format('ru'))));
+    }
+    public function plusDays(int $daysAmount, string $format): string
+    {
+        $formatString = '';
+        switch ($format) {
+            case 'ru':
+                $formatString = 'd/m/Y';
+                break;
+            case 'en':
+                $formatString = 'Y-m-d';
+                break;
+            default:
+                throw new InvalidArgumentException('Неверный формат.');
+        }
+        return date($formatString, strtotime("{$daysAmount} days", strtotime($this->format('ru'))));
     }
 
     public function getDayOfWeek(): string
