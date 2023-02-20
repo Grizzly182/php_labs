@@ -1,0 +1,21 @@
+{
+    "name": "mikhail/lab5",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Mikhail\\Lab5\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Grizzly182",
+            "email": "tiger.mananticot@yandex.ru"
+        }
+    ],
+    "require": {
+        "phpstan/phpstan": "^1.9"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.7"
+    }
+}
