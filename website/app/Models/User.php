@@ -7,11 +7,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    use HasRoles;
 
+    public function accounts(): HasMany
+    {
+        return $this->hasMany(Product::class, 'created_by', 'id');
+    }
     /**
      * The attributes that are mass assignable.
      *

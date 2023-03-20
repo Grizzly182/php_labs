@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
@@ -10,7 +11,7 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    public function index(): View
+    public function showEditing(): View
     {
         $products = Product::all();
 
@@ -22,29 +23,31 @@ class ProductController extends Controller
         return view('articles.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(ProductRequest $request): RedirectResponse
     {
         Product::create($request->all());
 
-        return redirect()->intended()->with('success', 'Article succesfully created');
+        return redirect()->back()->with('success', 'Product succesfully created');
     }
 
     public function destroy(Product $product): RedirectResponse
     {
+        $this->authorize('delete', $product);
         $product->delete();
 
-        return redirect()->route('products.index')->with('success', 'Article succesfully deleted');
+        return redirect()->back()->with('success', 'Product succesfully deleted');
     }
 
     public function edit(Product $product): View
     {
+        $this->authorize('update', $product);
         return view('articles.edit', compact('product'));
     }
 
-    public function update(Request $request, Product $product): RedirectResponse
+    public function update(ProductRequest $request, Product $product): RedirectResponse
     {
         $product->update($request->all());
 
-        return redirect()->route('products.index')->with('success', 'Article updated successfully');
+        return redirect()->intended()->with('success', 'Article updated successfully');
     }
 }

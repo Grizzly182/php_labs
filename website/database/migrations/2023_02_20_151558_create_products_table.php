@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price');
             $table->text('description');
             $table->integer('count');
+            $table->foreignId('created_by')->references('id')->on('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

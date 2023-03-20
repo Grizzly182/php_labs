@@ -11,8 +11,11 @@
                         width="300">
                 </div>
             </div>
-
-            <h1 class="h3 mb-3 fw-normal">Login</h1>
+            <div class="d-flex container justify-content-center align-items-center">
+                <div class="row">
+                    <h1 class="h3 mb-3 fw-normal">Login</h1>
+                </div>
+            </div>
 
 
             <div class="form-group form-floating mb-3">
@@ -40,7 +43,11 @@
                 </div>
             </div>
 
-            @include('auth.partials.copy')
+            <div class="d-flex container justify-content-center align-items-center">
+                <div class="row">
+                    @include('auth.partials.copy')
+                </div>
+            </div>
         </form>
     </div>
 @endsection

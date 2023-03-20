@@ -4,16 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
 {
 
-    public function user()
-    {
-        return $this->morphOne(User::class, 'id');
-    }
-
     use HasFactory;
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
 
     protected $guarded = [];
 }

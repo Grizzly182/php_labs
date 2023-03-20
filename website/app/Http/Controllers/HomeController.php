@@ -14,10 +14,7 @@ class HomeController extends Controller
     public function index(): View
     {
         $products = Product::query()->orderBy('created_at', 'desc')->limit(9)->get();
-        $users = [];
-        foreach ($products as $product) {
-            $users[] = User::query()->where('id', '=', $product->created_by);
-        }
-        return view('home.index', compact('products'), compact('users'));
+        return view('home.index', compact('products'));
     }
+
 }

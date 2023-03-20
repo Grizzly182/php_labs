@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\APIProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,15 +20,72 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-
 Route::get('/', [HomeController::class, 'index'])->name('website.home');
 Route::prefix('/')->group(function () {
-    Route::get('/moderation', [ProductController::class, 'index'])->name('products.index');
-    Route::post('/moderation', [ProductController::class, 'store'])->name('products.store');
-    Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
-    Route::get('/create', [ProductController::class, 'create'])->name('products.create');
-    Route::get('/moderation/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-    Route::put('/moderation/{product}', [ProductController::class, 'update'])->name('products.update');
+
+
+    Route::prefix('api/')->group(function () {
+        Route::get('/products', [APIProductController::class, 'getAllProducts'])->name('api.products');
+    }
+    );
+
+    Route::group(
+        ['middleware' => ['can:create-blog-posts']],
+        function () {
+            Route::get('/create', [ProductController::class, 'create'])->name('products.create');
+            Route::post('/create', [ProductController::class, 'store'])->name('products.store');
+        }
+    );
+
+    Route::group(
+        ['middleware' => ['can:edit-blog-posts']],
+        function () {
+            Route::get('/editing/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+            Route::put('/editing/{product}', [ProductController::class, 'update'])->name('products.update');
+        }
+    );
+
+    Route::group(
+        ['middleware' => ['can:delete-blog-posts']],
+        function () {
+            Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+        }
+    );
+
+    Route::group(
+        ['middleware' => ['can:create-users']],
+        function () {
+            // ..
+        }
+    );
+
+    Route::group(
+        ['middleware' => ['can:edit-users']],
+        function () {
+            // ..
+        }
+    );
+
+    Route::group(
+        ['middleware' => ['can:delete-users']],
+        function () {
+            Route::get('/users/editing', [UserController::class, 'showEditing'])->name('users.editing');
+        }
+    );
+
+    Route::group(
+        ['middleware' => ['can:edit-others-blog-posts']],
+        function () {
+            Route::get('/editing', [ProductController::class, 'showEditing'])->name('products.index');
+        }
+    );
+
+
+    Route::group(
+        ['middleware' => ['can:delete-others-blog-posts']],
+        function () {
+        }
+    );
 
     Route::group(
         ['middleware' => ['guest']],
@@ -42,6 +101,7 @@ Route::prefix('/')->group(function () {
     Route::group(
         ['middleware' => ['auth']],
         function () {
+            Route::get('/profile/{user}', [UserController::class, 'show'])->name('home.profile');
             Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
         }
     );

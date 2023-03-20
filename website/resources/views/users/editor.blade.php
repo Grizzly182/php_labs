@@ -7,7 +7,7 @@
                 <h2>Products</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('products.create') }}">Create New Product</a>
+                <a class="btn btn-success" href="{{ route('users.create') }}">Create New Product</a>
             </div>
         </div>
     </div>
@@ -21,25 +21,23 @@
     <table class="table table-bordered mt-2">
         <tr>
             <th>Id</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Created By</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Verified At</th>
             <th>Created At</th>
-            <th>In Stock</th>
+            <th>Updated At</th>
         </tr>
-        @foreach ($products as $product)
+        @foreach ($users as $user)
             <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $product->name }}</td>
-                <td>{{ $product->description }}</td>
-                <td>{{ $product->price }} ₽</td>
-                <td>{{ $product->user->email }}</td>
-                <td>{{ $product->created_at }}</td>
-                <td>{{ $product->count }}</td>
+                <td>{{ $user->id }}</td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->email_verified_at }} ₽</td>
+                <td>{{ $user->created_at }}</td>
+                <td>{{ $user->updated_at }}</td>
                 <td>
-                    <a class="btn btn-primary btn-block mt-1 mb-1" href="{{ route('products.edit', $product->id) }}">Edit</a>
-                    <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+                    <a class="btn btn-primary btn-block mt-1 mb-1" href="{{ route('users.editing', $user->id) }}">Edit</a>
+                    <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-block mt-1 mb-1">Delete</button>

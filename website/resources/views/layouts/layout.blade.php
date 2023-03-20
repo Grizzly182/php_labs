@@ -8,6 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+    </script>
     <title>Products</title>
 </head>
 
@@ -35,9 +38,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Pricing</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('products.index') }}">Edit</a>
-                    </li>
                 </ul>
 
             </div>
@@ -45,16 +45,42 @@
                 <div class="d-grid gap-2 d-md-block">
                     <a href="{{ route('login.show') }}" class="btn btn-outline-light" role="button" tabindex="-1">Log
                         In</a>
-                    <a href="{{ route('register.show') }}" class="btn btn-warning" role="button" tabindex="-1">Sign Up</a>
+                    <a href="{{ route('register.show') }}" class="btn btn-warning" role="button" tabindex="-1">Sign
+                        Up</a>
                 </div>
             @else
                 <div class="gap-5 mr-3 ">
                     <a href="{{ route('products.create') }}" class="btn btn-warning" role="button" tabindex="-1">New
-                        Account</a>
-                    <a href="{{ route('logout.perform') }}" class="btn btn-outline-light" role="button"
-                        tabindex="-1">Logout</a>
+                        Product</a>
                 </div>
-                <h5 style="color: grey; margin: 0">{{ auth()->user()->name }}</h5>
+                <ul class="navbar-nav mb-2 mt-10 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ auth()->user()->name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ route('home.profile', auth()->user()) }}">My Accounts</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <!-- ADMIN PANEL -->
+                            @if (auth()->user()->hasRole('Admin'))
+                                <li><a class="dropdown-item" href="#">Admin Panel</a></li>
+                            @endif
+
+                            <!-- EDITOR PANEL -->
+                            @if (auth()->user()->hasRole('Editor') ||
+                                    auth()->user()->hasRole('Admin'))
+                                <li><a class="dropdown-item" href="{{ route('products.index') }}">Editor Panel</a></li>
+                            @endif
+
+                            <li><a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
             @endguest
         </div>
     </nav>
