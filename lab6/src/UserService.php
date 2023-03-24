@@ -21,19 +21,13 @@ class UserService
 
             case 'desc':
                 $sortMethod = function ($x, $y) {
-                    if ($x->getUsername() === $y->getUsername()) {
-                        return 0;
-                    }
-                    return $x->getUsername() > $y->getUsername() ? -1 : 1;
+                    return $y->getUsername() <=> $x->getUsername();
                 };
                 break;
 
             case 'asc':
                 $sortMethod = function ($x, $y) {
-                    if ($x->getUsername() === $y->getUsername()) {
-                        return 0;
-                    }
-                    return $x->getUsername() < $y->getUsername() ? -1 : 1;
+                    return $x->getUsername() <=> $y->getUsername();
                 };
                 break;
 
@@ -64,19 +58,13 @@ class UserService
 
             case 'younger':
                 $sortMethod = function ($x, $y) {
-                    if ($x->getBirthday() === $y->getBirthday()) {
-                        return 0;
-                    }
-                    return $x->getBirthday() > $y->getBirthday() ? -1 : 1;
+                    return $y->getBirthday() <=> $x->getBirthday();
                 };
                 break;
 
             case 'older':
                 $sortMethod = function ($x, $y) {
-                    if ($x->getBirthday() === $y->getBirthday()) {
-                        return 0;
-                    }
-                    return $x->getBirthday() < $y->getBirthday() ? -1 : 1;
+                    return $x->getBirthday() <=> $y->getBirthday();
                 };
                 break;
 
