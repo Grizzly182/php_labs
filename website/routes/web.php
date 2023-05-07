@@ -24,9 +24,10 @@ Route::get('/', [HomeController::class, 'index'])->name('website.home');
 Route::prefix('/')->group(function () {
 
 
-    Route::prefix('api/')->group(function () {
-        Route::get('/products', [APIProductController::class, 'getAllProducts'])->name('api.products');
-    }
+    Route::prefix('api/')->group(
+        function () {
+            Route::get('/products', [APIProductController::class, 'getAllProducts'])->name('api.products');
+        }
     );
 
     Route::group(
@@ -62,14 +63,16 @@ Route::prefix('/')->group(function () {
     Route::group(
         ['middleware' => ['can:edit-users']],
         function () {
-            // ..
+            Route::put('/users/edit/{user}/update', [UserController::class, 'update'])->name('users.update');
+            Route::get('/users/edit/{user}', [UserController::class, 'edit'])->name('users.edit');
         }
     );
 
     Route::group(
         ['middleware' => ['can:delete-users']],
         function () {
-            Route::get('/users/editing', [UserController::class, 'showEditing'])->name('users.editing');
+            Route::get('/users/editor/searching', [UserController::class, 'searchUser'])->name('users.search');
+            Route::get('/users/editor', [UserController::class, 'showEditing'])->name('users.editor');
         }
     );
 

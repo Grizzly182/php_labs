@@ -12,7 +12,9 @@
                         <p class="lead">{{ $user->created_at->format('m/Y') }}</p>
                     </h6>
                 </div>
-                @if ($user->id === auth()->id())
+                @if (
+                    $user->id === auth()->id() ||
+                        auth()->user()->hasRole('Admin'))
                     <a href="#" class="btn btn-lg btn-secondary" role="button">Edit</a>
                 @endif
             </div>

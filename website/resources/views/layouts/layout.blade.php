@@ -19,8 +19,7 @@
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('website.home') }}">
-                <img src="https://www.vippng.com/png/full/211-2114276_the-bleach-fan-club-bleach-anime-logo-png.png"
-                    style="width:200px">
+                <img src="{{ asset('storage/logo.png') }}" style="width:200px">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +67,7 @@
 
                             <!-- ADMIN PANEL -->
                             @if (auth()->user()->hasRole('Admin'))
-                                <li><a class="dropdown-item" href="#">Admin Panel</a></li>
+                                <li><a class="dropdown-item" href="{{ route('users.editor') }}">Admin Panel</a></li>
                             @endif
 
                             <!-- EDITOR PANEL -->
@@ -99,8 +98,7 @@
         <a href="{{ route('website.home') }}"
             class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <svg class="bi me-2" width="40" height="32">
-                <img src="https://www.vippng.com/png/full/211-2114276_the-bleach-fan-club-bleach-anime-logo-png.png"
-                    width="200">
+                <img src="{{ asset('storage/logo.png') }}" width="200">
             </svg>
         </a>
 

@@ -1,15 +1,14 @@
 @extends('layouts.auth-layout')
 
 @section('content')
-    <div class="position-absolute container  d-flex h-100 flex-column justify-content-center align-items-center">
+    <div class="position-absolute container  d-flex h-100 flex-column justify-content-center align-items-center"
+        enctype="multipart/form-data">
         <form class="d-flex flex-column w-50" method="post" action="{{ route('register.perform') }}">
             <div class="container">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="d-flex container justify-content-center align-items-center">
                     <div class="row">
-                        <img class="mb-4"
-                            src="https://www.vippng.com/png/full/211-2114276_the-bleach-fan-club-bleach-anime-logo-png.png"
-                            width="300">
+                        <img class="mb-4" src="{{ asset('storage/logo.png') }}" width="300">
                     </div>
                 </div>
                 <div class="d-flex container justify-content-center align-items-center">
@@ -51,6 +50,15 @@
                     <label for="floatingConfirmPassword">Confirm Password</label>
                     @if ($errors->has('password_confirmation'))
                         <span class="text-danger text-left">{{ $errors->first('password_confirmation') }}</span>
+                    @endif
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="file" class="form-control" name="avatar" id="floatingAvatar"
+                        value="{{ old('avatar') }}" placeholder="Choose your avatar">
+                    <label for="floatingAvatar">Avatar</label>
+                    @if ($errors->has('avatar'))
+                        <span class="text-danger text-left">{{ $errors->first('avatar') }}</span>
                     @endif
                 </div>
                 @include('auth.partials.messages')

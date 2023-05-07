@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Spatie\Permission\Commands\Show;
@@ -28,10 +29,35 @@ class UserController extends Controller
         return view('users.create');
     }
 
+    public function update(User $user, UserUpdateRequest $request)
+    {
+        $user->update($request->all());
+        $user->syncRoles([]);
+        $user->assignRole($request->input('role'));
+        $users = User::all();
+        return view('users.editor', compact('users'));
+    }
+
+    public function edit(User $user): View
+    {
+        return view('users.edit', compact('user'));
+    }
+
     public function store(UserRequest $request): RedirectResponse
     {
         User::create($request->all());
 
         return redirect()->back()->with('success', 'User succesfully created.');
+    }
+
+    public function searchUser(): View
+    {
+        if (request('user_search')) {
+            $users = User::where("name", 'like', "%" . request('user_search') . "%")->get();
+        } else {
+            $users = User::all();
+        }
+
+        return view('users.editor')->with('users', $users);
     }
 }

@@ -6,9 +6,7 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
             <div class="d-flex container justify-content-center align-items-center">
                 <div class="row">
-                    <img class="mb-4"
-                        src="https://www.vippng.com/png/full/211-2114276_the-bleach-fan-club-bleach-anime-logo-png.png"
-                        width="300">
+                    <img class="mb-4" src="{{ asset('storage/logo.png') }}" width="300">
                 </div>
             </div>
             <div class="d-flex container justify-content-center align-items-center">
