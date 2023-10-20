@@ -78,6 +78,10 @@
 
                             <li><a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a></li>
                         </ul>
+                        @auth
+                            {{-- <img class="nav-link" href="#" width="64" height="64" id="userAvatar"
+                                src="{{ asset(auth()->user()->avatar) }}"> --}}
+                        @endauth
                     </li>
                 </ul>
             @endguest

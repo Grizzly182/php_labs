@@ -1,9 +1,9 @@
 @extends('layouts.auth-layout')
 
 @section('content')
-    <div class="position-absolute container  d-flex h-100 flex-column justify-content-center align-items-center"
-        enctype="multipart/form-data">
-        <form class="d-flex flex-column w-50" method="post" action="{{ route('register.perform') }}">
+    <div class="position-absolute container  d-flex h-100 flex-column justify-content-center align-items-center">
+        <form class="d-flex flex-column w-50" method="post" action="{{ route('register.perform') }}"
+            enctype="multipart/form-data">
             <div class="container">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="d-flex container justify-content-center align-items-center">

@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,13 @@ Route::prefix('/')->group(function () {
         function () {
             Route::put('/users/edit/{user}/update', [UserController::class, 'update'])->name('users.update');
             Route::get('/users/edit/{user}', [UserController::class, 'edit'])->name('users.edit');
+            Route::get(
+                '/users/edit/download/{user}',
+                function (User $user) {
+                        //dd($user);
+                        return Storage::download((string) $user->avatar);
+                    }
+            )->name('users.download');
         }
     );
 

@@ -29,9 +29,18 @@ class UserController extends Controller
         return view('users.create');
     }
 
+    public function downloadAvatar(string $path)
+    {
+        return \Illuminate\Support\Facades\Storage::download($path);
+    }
+
     public function update(User $user, UserUpdateRequest $request)
     {
         $user->update($request->all());
+        if ($request->file('avatar') != null) {
+            $user->avatar = $request->file('avatar')->store('avatars');
+            $user->save();
+        }
         $user->syncRoles([]);
         $user->assignRole($request->input('role'));
         $users = User::all();

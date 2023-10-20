@@ -34,6 +34,8 @@
         @foreach ($users as $user)
             <tr>
                 <td>{{ $user->id }}</td>
+                <td><img src="{{ asset($user->avatar) }}" alt="{{ $user->avatar }}" width="100" height="100" />
+                </td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->email_verified_at }}</td>
@@ -42,6 +44,8 @@
                 <td>{{ $user->getRoleNames()[0] }}</td>
                 <td>
                     <a class="btn btn-primary btn-block mt-1 mb-1" href="{{ route('users.edit', $user->id) }}">Edit</a>
+                    <a class="btn btn-primary btn-block mt-1 mb-1"
+                        href="{{ route('users.download', $user->id) }}">Download</a>
                     <form action="#" method="POST">
                         @csrf
                         @method('DELETE')

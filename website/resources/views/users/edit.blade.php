@@ -22,7 +22,7 @@
         </div>
     @endif
 
-    <form action="{{ route('users.update', $user->id) }}" method="POST">
+    <form action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         @method('PUT')
@@ -39,6 +39,14 @@
                 <div class="form-group">
                     <strong>Email:</strong>
                     <textarea class="form-control" style="height:150px" name="email" placeholder="Email">{{ $user->email }}</textarea>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Avatar:</strong>
+                    <input type="file" class="form-control" style="height:150px" name="avatar">Avatar(Оставьте пустым
+                    если не хотите менять)</input>
                 </div>
             </div>
 
